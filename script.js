@@ -97,6 +97,10 @@ function revealTheJourney(){
   startQuiz();
   createConfetti();
   document.getElementById('memory-cards').scrollIntoView({ behavior:'smooth' });
+
+  // Make all flip-cards the same height (based on the tallest one)
+  requestAnimationFrame(setUniformFlipCardHeight);
+  setTimeout(setUniformFlipCardHeight, 50);
 }
 
 // --- QUIZ LOGIC ---
@@ -201,3 +205,44 @@ revealTheJourney = function(){
   requestAnimationFrame(updateFlipCardHeights);
   setTimeout(updateFlipCardHeights, 50);
 };
+function setUniformFlipCardHeight(){
+  const cards = Array.from(document.querySelectorAll('.flip-card'));
+  if(!cards.length) return;
+
+  // Reset to natural height first so we can measure correctly
+  cards.forEach(c => (c.style.height = ''));
+
+  let maxH = 0;
+
+  cards.forEach(card => {
+    const front = card.querySelector('.flip-card-front');
+    const back  = card.querySelector('.flip-card-back');
+    if(!front || !back) return;
+
+    // Temporarily remove absolute stacking to measure content height
+    const pf = front.style.position;
+    const pb = back.style.position;
+
+    front.style.position = 'relative';
+    back.style.position  = 'relative';
+
+    maxH = Math.max(maxH, front.scrollHeight, back.scrollHeight);
+
+    // Restore original positions for flip
+    front.style.position = pf || 'absolute';
+    back.style.position  = pb || 'absolute';
+  });
+
+  // Apply the tallest height to every card
+  cards.forEach(card => {
+    card.style.height = maxH + 'px';
+    const inner = card.querySelector('.flip-card-inner');
+    if(inner) inner.style.height = maxH + 'px';
+  });
+}
+
+window.addEventListener('load', setUniformFlipCardHeight);
+window.addEventListener('resize', () => {
+  clearTimeout(window.__uniformFlipTimer);
+  window.__uniformFlipTimer = setTimeout(setUniformFlipCardHeight, 100);
+});
