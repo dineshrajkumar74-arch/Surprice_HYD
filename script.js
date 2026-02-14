@@ -11,12 +11,16 @@ const ring = document.querySelector('.ring');
 const sections = ['memory-cards', 'quiz', 'valentine-letter', 'finale'];
 
 let attempts = 0;
-const maxAttempts = 10;
+const maxAttempts = 25;            // UPDATED: increase attempts
 const approachThreshold = 110;
 const totalSmileSeconds = 10;
 const midSmileSeconds = 5;
 let movingEnabled = true;
 let smallCooldown = false;
+
+// UPDATED: slow down how frequently YES moves (increase for more time)
+const moveCooldownMs = 250;
+let lastMoveTime = 0;
 
 // --- QUIZ DATA ---
 const quizQuestions = [
@@ -31,6 +35,9 @@ let score = 0;
 function initYesPosition(){
   yesBtn.style.left = '12px';
   yesBtn.style.top = `${Math.max(6, Math.floor((yesnoArea.clientHeight - yesBtn.offsetHeight)/2))}px`;
+
+  // UPDATED: show max attempts in UI
+  if(maxAttemptsElem) maxAttemptsElem.textContent = maxAttempts;
 }
 window.addEventListener('load', initYesPosition);
 
@@ -43,12 +50,18 @@ function distToYesCenter(clientX, clientY){
 
 function moveYes(){
   if(!movingEnabled) return;
+
+  // UPDATED: cooldown so it doesn't move too fast
+  const now = Date.now();
+  if(now - lastMoveTime < moveCooldownMs) return;
+  lastMoveTime = now;
+
   attempts++;
   attemptsElem.textContent = attempts;
-  
+
   const maxLeft = yesnoArea.clientWidth - yesBtn.offsetWidth - 10;
   const maxTop = yesnoArea.clientHeight - yesBtn.offsetHeight - 10;
-  
+
   yesBtn.style.left = `${Math.random() * maxLeft}px`;
   yesBtn.style.top = `${Math.random() * maxTop}px`;
 
@@ -114,10 +127,10 @@ function showQuestion() {
     const questionElem = document.getElementById('question');
     const btnContainer = document.getElementById('answer-buttons');
     const data = quizQuestions[currentQuestionIndex];
-    
+
     questionElem.innerText = data.q;
     btnContainer.innerHTML = '';
-    
+
     data.a.forEach((choice, index) => {
         const button = document.createElement('button');
         button.innerText = choice;
@@ -162,49 +175,6 @@ function createConfetti(){
   }
 }
 
-/* --- AUTO-HEIGHT FOR FLIP CARDS (keeps flip + prevents text overflow) --- */
-function updateFlipCardHeights(){
-  document.querySelectorAll('.flip-card').forEach(card => {
-    const front = card.querySelector('.flip-card-front');
-    const back  = card.querySelector('.flip-card-back');
-    if(!front || !back) return;
-
-    // Temporarily measure natural height of both sides
-    const prevFrontPos = front.style.position;
-    const prevBackPos  = back.style.position;
-
-    front.style.position = 'relative';
-    back.style.position  = 'relative';
-
-    const frontH = front.scrollHeight;
-    const backH  = back.scrollHeight;
-    const target = Math.max(frontH, backH);
-
-    // Restore stacking for flip
-    front.style.position = prevFrontPos || 'absolute';
-    back.style.position  = prevBackPos  || 'absolute';
-
-    // Apply height to card + inner so both faces fit
-    card.style.height = target + 'px';
-    const inner = card.querySelector('.flip-card-inner');
-    if(inner) inner.style.height = target + 'px';
-  });
-}
-
-/* Call once on load and again when layout changes */
-window.addEventListener('load', updateFlipCardHeights);
-window.addEventListener('resize', () => {
-  clearTimeout(window.__flipResizeTimer);
-  window.__flipResizeTimer = setTimeout(updateFlipCardHeights, 100);
-});
-
-/* After you reveal sections, cards become visible -> measure then */
-const originalReveal = revealTheJourney;
-revealTheJourney = function(){
-  originalReveal();
-  requestAnimationFrame(updateFlipCardHeights);
-  setTimeout(updateFlipCardHeights, 50);
-};
 function setUniformFlipCardHeight(){
   const cards = Array.from(document.querySelectorAll('.flip-card'));
   if(!cards.length) return;
