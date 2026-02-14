@@ -16,6 +16,7 @@ const approachThreshold = 110;
 const totalSmileSeconds = 10;
 const midSmileSeconds = 5;
 let movingEnabled = true;
+let smallCooldown = false;
 
 // --- QUIZ DATA ---
 const quizQuestions = [
