@@ -93,6 +93,9 @@ body{
   text-align: center;
   overflow-wrap: anywhere;
   word-break: break-word;
+
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 /* --- NEW: QUIZ STYLING --- */
