@@ -9,27 +9,39 @@
 </head>
 <body>
   <header class="main-header">
-    <h1 class="page-title">✨ Welcome to Our space potti ✨</h1>
+    <!-- Large title OUTSIDE the content box -->
+    <h1 class="page-title">✨ Welcome to Our Memory Journey ✨</h1>
+
     <div class="hero-content">
       <p class="lead">A beautiful celebration of love and cherished moments together.</p>
+
       <div class="challenge-container">
         <h2 class="challenge-question">Do you really want to see our journey? 💭</h2>
+
         <div id="yesnoArea" class="yesno-area" aria-label="Yes/No area">
           <button id="yes-btn" class="btn btn-yes unclickable" aria-disabled="true">YES! 💕</button>
           <button id="no-btn" class="btn btn-no">No Way 😢</button>
         </div>
+
+        <!-- Attempts kept in DOM for logic but VISUALLY HIDDEN from users -->
         <div class="attempts-display visually-hidden">
           Attempts: <strong id="attempts">0</strong>/<span id="maxAttempts">10</span>
         </div>
+
+        <!-- Smile area: visible with progress ring. Timer is NOT shown to user (subtle ring) -->
         <div id="smileArea" class="smile-area hidden" aria-hidden="true">
           <div id="smileText" class="smile-text">Give me your biggest smile! 😊</div>
+
+          <!-- progress ring -->
           <svg class="progress-ring" width="84" height="84" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="50" stroke-width="10" fill="none"/>
             <circle class="ring" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
+
       </div>
     </div>
+
     <div class="scroll-hint">💫 Scroll to explore</div>
   </header>
 
