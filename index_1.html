@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💕 Memory Journey</title>
+
+  <!-- Beautiful fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="main-header">
+    <!-- Large title OUTSIDE the content box -->
+    <h1 class="page-title">✨ Welcome to Our Journey ✨</h1>
+
+    <div class="hero-content">
+      <p class="lead">A beautiful celebration of love and cherished moments together.</p>
+
+      <div class="challenge-container">
+        <h2 class="challenge-question">Do you really want to see our journey? 💭</h2>
+
+        <div id="yesnoArea" class="yesno-area" aria-label="Yes/No area">
+          <button id="yes-btn" class="btn btn-yes unclickable" aria-disabled="true">YES! 💕</button>
+          <button id="no-btn" class="btn btn-no">No Way 😢</button>
+        </div>
+
+        <!-- Attempts kept in DOM for logic but VISUALLY HIDDEN from users -->
+        <div class="attempts-display visually-hidden">
+          Attempts: <strong id="attempts">0</strong>/<span id="maxAttempts">10</span>
+        </div>
+
+        <!-- Smile area: visible with progress ring. Timer is NOT shown to user (subtle ring) -->
+        <div id="smileArea" class="smile-area hidden" aria-hidden="true">
+          <div id="smileText" class="smile-text">Give me your biggest smile! 😊</div>
+
+          <!-- progress ring -->
+          <svg class="progress-ring" width="84" height="84" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="50" stroke-width="10" fill="none"/>
+            <circle class="ring" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="scroll-hint">💫 Scroll to explore</div>
+  </header>
+
+  <!-- Hidden content that appears after YES is finally clicked -->
+  <main>
+    <section id="memory-cards" class="memory-section hidden">
+      <h2>📚 Our Beautiful Memories</h2>
+      <div class="card-container">
+        <div class="card"><div class="card-icon">🌅</div><h3>First Meeting</h3><p>The day everything changed. When I saw you, my heart knew it had found home.</p></div>
+        <div class="card"><div class="card-icon">💑</div><h3>First Date</h3><p>Nervous but hopeful. Every moment with you felt like a dream come true.</p></div>
+        <div class="card"><div class="card-icon">🎄</div><h3>First Holiday</h3><p>Spending festive moments together made everything magical and meaningful.</p></div>
+        <div class="card"><div class="card-icon">🌸</div><h3>Spring Adventure</h3><p>Exploring new places and creating unforgettable memories with you.</p></div>
+        <div class="card"><div class="card-icon">🌙</div><h3>Midnight Talks</h3><p>Late night conversations where we shared our deepest dreams and fears.</p></div>
+        <div class="card"><div class="card-icon">❤️</div><h3>Forever Promise</h3><p>With you, I found my forever. You are my greatest adventure.</p></div>
+      </div>
+    </section>
+
+    <section id="timeline" class="timeline-section hidden">
+      <h2>📅 Our Timeline</h2>
+      <ul class="timeline-list">
+        <li><strong>Day 1:</strong> When our story began - A moment I'll never forget</li>
+        <li><strong>Month 3:</strong> First "I love you" - Words that changed everything</li>
+        <li><strong>Month 6:</strong> Meeting your family - Feeling like I truly belonged</li>
+        <li><strong>Year 1:</strong> Our anniversary - Celebrating the greatest year of my life</li>
+      </ul>
+    </section>
+
+    <section id="gallery" class="gallery-section hidden">
+      <h2>🖼️ Photo Gallery</h2>
+      <div class="gallery-container">
+        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 1</div></div>
+        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 2</div></div>
+        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 3</div></div>
+        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 4</div></div>
+        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 5</div></div>
+        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 6</div></div>
+      </div>
+    </section>
+
+    <section id="love-letter" class="letter-section hidden">
+      <h2>💌 A Letter from My Heart</h2>
+      <div class="letter-box">
+        <p>My Dearest,</p>
+        <p>I wanted to take a moment to tell you what you mean to me. Every day with you feels like a blessing. Your smile brightens my darkest days, your laugh is my favorite sound, and your presence makes everything feel right.</p>
+        <p>Thank you for choosing me, for believing in us, and for showing me what true love means. You are my greatest adventure, my safest harbor, and my forever.</p>
+        <p>With all my love,<br>Your Partner 💕</p>
+      </div>
+    </section>
+
+    <section id="quiz" class="quiz-section hidden">
+      <h2>❓ How Well Do You Know Me?</h2>
+      <div class="quiz-container">
+        <p>Coming soon! A fun interactive quiz about our memories together.</p>
+      </div>
+    </section>
+
+    <section id="wishes" class="wishes-section hidden">
+      <h2>📝 Memory Wall</h2>
+      <div class="wishes-container">
+        <div class="wish-item"><p class="wish-text">"Every moment with you is a treasure."</p></div>
+        <div class="wish-item"><p class="wish-text">"You are my favorite hello and my hardest goodbye."</p></div>
+        <div class="wish-item"><p class="wish-text">"Forever is not long enough to love you."</p></div>
+        <div class="wish-item"><p class="wish-text">"You make my heart smile."</p></div>
+      </div>
+    </section>
+
+    <section id="finale" class="finale-section hidden">
+      <h2>🎉 Thank you for this journey 🎉</h2>
+      <p>Forever grateful for every moment with you.</p>
+      <div class="hearts">💕 💕 💕</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
