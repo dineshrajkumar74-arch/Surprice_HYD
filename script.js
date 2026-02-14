@@ -157,3 +157,47 @@ function createConfetti(){
     }, 20);
   }
 }
+
+/* --- AUTO-HEIGHT FOR FLIP CARDS (keeps flip + prevents text overflow) --- */
+function updateFlipCardHeights(){
+  document.querySelectorAll('.flip-card').forEach(card => {
+    const front = card.querySelector('.flip-card-front');
+    const back  = card.querySelector('.flip-card-back');
+    if(!front || !back) return;
+
+    // Temporarily measure natural height of both sides
+    const prevFrontPos = front.style.position;
+    const prevBackPos  = back.style.position;
+
+    front.style.position = 'relative';
+    back.style.position  = 'relative';
+
+    const frontH = front.scrollHeight;
+    const backH  = back.scrollHeight;
+    const target = Math.max(frontH, backH);
+
+    // Restore stacking for flip
+    front.style.position = prevFrontPos || 'absolute';
+    back.style.position  = prevBackPos  || 'absolute';
+
+    // Apply height to card + inner so both faces fit
+    card.style.height = target + 'px';
+    const inner = card.querySelector('.flip-card-inner');
+    if(inner) inner.style.height = target + 'px';
+  });
+}
+
+/* Call once on load and again when layout changes */
+window.addEventListener('load', updateFlipCardHeights);
+window.addEventListener('resize', () => {
+  clearTimeout(window.__flipResizeTimer);
+  window.__flipResizeTimer = setTimeout(updateFlipCardHeights, 100);
+});
+
+/* After you reveal sections, cards become visible -> measure then */
+const originalReveal = revealTheJourney;
+revealTheJourney = function(){
+  originalReveal();
+  requestAnimationFrame(updateFlipCardHeights);
+  setTimeout(updateFlipCardHeights, 50);
+};
