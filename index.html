@@ -4,111 +4,117 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💕 Memory Journey</title>
-
-  <!-- Beautiful fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="main-header">
-    <!-- Large title OUTSIDE the content box -->
     <h1 class="page-title">✨ Welcome to Our space potti ✨</h1>
-
     <div class="hero-content">
       <p class="lead">A beautiful celebration of love and cherished moments together.</p>
-
       <div class="challenge-container">
         <h2 class="challenge-question">Do you really want to see our journey? 💭</h2>
-
         <div id="yesnoArea" class="yesno-area" aria-label="Yes/No area">
           <button id="yes-btn" class="btn btn-yes unclickable" aria-disabled="true">YES! 💕</button>
           <button id="no-btn" class="btn btn-no">No Way 😢</button>
         </div>
-
-        <!-- Attempts kept in DOM for logic but VISUALLY HIDDEN from users -->
         <div class="attempts-display visually-hidden">
           Attempts: <strong id="attempts">0</strong>/<span id="maxAttempts">10</span>
         </div>
-
-        <!-- Smile area: visible with progress ring. Timer is NOT shown to user (subtle ring) -->
         <div id="smileArea" class="smile-area hidden" aria-hidden="true">
           <div id="smileText" class="smile-text">Give me your biggest smile! 😊</div>
-
-          <!-- progress ring -->
           <svg class="progress-ring" width="84" height="84" viewBox="0 0 120 120" aria-hidden="true">
             <circle class="ring-bg" cx="60" cy="60" r="50" stroke-width="10" fill="none"/>
             <circle class="ring" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
-
       </div>
     </div>
-
     <div class="scroll-hint">💫 Scroll to explore</div>
   </header>
 
-  <!-- Hidden content that appears after YES is finally clicked -->
   <main>
     <section id="memory-cards" class="memory-section hidden">
       <h2>📚 Our Beautiful Memories</h2>
+      <p class="instruction-text">(Click a card to reveal the memory)</p>
       <div class="card-container">
-        <div class="card"><div class="card-icon">🌅</div><h3>First Meeting</h3><p> The first day I saw you, something just clicked. I can’t explain it properly, but it felt like my life was about to change in a good way. When I finally met you in person, your cute smile and that innocent vibe of yours honestly made me fall harder.</p></div>
-        <div class="card"><div class="card-icon">💑</div><h3>First Date</h3><p>Nervous but hopeful.------------------To be updated in next Release.</p></div>
-        <div class="card"><div class="card-icon">🎄</div><h3>First Workday</h3><p>I genuinely admire you. The way you handle work, take ownership, and still stay calm is crazy impressive. Even when you have a lot on your plate, you still make time to help others. I don’t know how you manage it, but you do it so gracefully. </p></div>
-        <div class="card"><div class="card-icon">🌸</div><h3>Spring Adventure</h3><p>Coming Sooon.....</p></div>
-        <div class="card"><div class="card-icon">🌙</div><h3>Midnight Talks</h3><p>Our late-night talks mean a lot to me. We’ve shared everything—happy stuff, sad stuff, random things, deep things. And I have to say sorry too… you always make time for me, but I’m not always as good at that. Still, you’re always patient, always kind, always respectful. I don’t know how you have that much patience, but I’m grateful you do.</p></div>
-        <div class="card"><div class="card-icon">❤️</div><h3>Forever Promise</h3><p>I don’t know what the future looks like exactly, but I know I want you in it. I’m not perfect, but I promise I’ll keep choosing you and I’ll be there for you whenever you need me.</p></div>
-      </div>
-    </section>
-
-    <section id="timeline" class="timeline-section hidden">
-      <h2>📅 Our Timeline</h2>
-      <ul class="timeline-list">
-        <li><strong>Day 1:</strong> When our story began - A moment I'll never forget</li>
-        <li><strong>Month 3:</strong> First "I love you" - Words that changed everything</li>
-        <li><strong>Month 6:</strong> Meeting your family - Feeling like I truly belonged</li>
-        <li><strong>Year 1:</strong> Our anniversary - Celebrating the greatest year of my life</li>
-      </ul>
-    </section>
-
-    <section id="gallery" class="gallery-section hidden">
-      <h2>🖼️ Photo Gallery</h2>
-      <div class="gallery-container">
-        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 1</div></div>
-        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 2</div></div>
-        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 3</div></div>
-        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 4</div></div>
-        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 5</div></div>
-        <div class="gallery-item"><div class="gallery-placeholder">📸 Photo 6</div></div>
-      </div>
-    </section>
-
-    <section id="love-letter" class="letter-section hidden">
-      <h2>💌 A Letter from My Heart</h2>
-      <div class="letter-box">
-        <p>My Dearest,</p>
-        <p>I wanted to take a moment to tell you what you mean to me. Every day with you feels like a blessing. Your smile brightens my darkest days, your laugh is my favorite sound, and your presence makes everything feel right.</p>
-        <p>Thank you for choosing me, for believing in us, and for showing me what true love means. You are my greatest adventure, my safest harbor, and my forever.</p>
-        <p>With all my love,<br>Your Partner 💕</p>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-icon">🌅</div>
+              <h3>First Meeting</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>The first day I saw you, something just clicked. Your cute smile and that innocent vibe made me fall harder.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-icon">💑</div>
+              <h3>First Date</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Nervous but hopeful. To be updated in next Release.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-icon">🎄</div>
+              <h3>First Workday</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>I genuinely admire you. The way you handle work and stay calm is crazy impressive!</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-icon">🌙</div>
+              <h3>Midnight Talks</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Happy stuff, sad stuff, random things... I’m grateful for your patience and kindness.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="quiz" class="quiz-section hidden">
-      <h2>❓ How Well Do You Know Me?</h2>
-      <div class="quiz-container">
-        <p>Coming soon! A fun interactive quiz about our memories together.</p>
+      <h2>❓ How Well Do You Know Us?</h2>
+      <div class="quiz-card">
+        <div id="quiz-content">
+          <p id="question">Loading question...</p>
+          <div id="answer-buttons" class="btn-grid"></div>
+        </div>
+        <div id="quiz-result" class="hidden">
+          <h3>Quiz Finished!</h3>
+          <p id="score-text"></p>
+          <button class="btn-refresh" onclick="resetQuiz()">Try Again</button>
+        </div>
       </div>
     </section>
 
-    <section id="wishes" class="wishes-section hidden">
-      <h2>📝 Memory Wall</h2>
-      <div class="wishes-container">
-        <div class="wish-item"><p class="wish-text">"Every moment with you is a treasure."</p></div>
-        <div class="wish-item"><p class="wish-text">"You are my favorite hello and my hardest goodbye."</p></div>
-        <div class="wish-item"><p class="wish-text">"Forever is not long enough to love you."</p></div>
-        <div class="wish-item"><p class="wish-text">"You make my heart smile."</p></div>
-      </div>
+    <section id="valentine-letter" class="valentine-section hidden">
+        <div class="envelope">
+            <div class="letter">
+                <div class="letter-content">
+                    <h2 class="letter-title">My Dearest Potti,</h2>
+                    <p>As I look back on everything we've shared, my heart overflows with gratitude. You aren't just my partner; you are my best friend and my greatest support.</p>
+                    <p>This Valentine's Day, I want to promise you that no matter where life takes us, I will always be by your side, cheering for you and loving you more each day.</p>
+                    <p>You make the world a brighter place just by being in it.</p>
+                    <div class="letter-footer">
+                        <p>Forever Yours,</p>
+                        <p class="signature">With all my love ❤️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="finale" class="finale-section hidden">
